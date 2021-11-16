@@ -1,0 +1,19 @@
+<form class="task-form">
+    <!-- <h1>Edit Task</h1> -->
+    <mat-form-field class="input-container full-width" appearance="fill">
+        <mat-label class="input" color="black">Title</mat-label>
+        <input  #task_title matInput (keyup)="getVal({title:task_title.value})" value={{task.title}}>
+    </mat-form-field>
+    <mat-form-field class="input-container full-width" appearance="fill">
+        <mat-label class="input" color="black">Description</mat-label>
+        <textarea  #task_desc matInput (keyup)="getVal({title:task_desc.value})" value={{task.description}}></textarea>
+    </mat-form-field>
+    <!-- TODO:handle move to mainlist -->
+    <div *ngIf="!data.listIsMain">
+        <mat-checkbox  #c [checked]='false' (click)="toggle(!c.checked)" class="checkbox" [disabled]="false">move to main list</mat-checkbox>
+    </div>
+    <!-- <p>enter some title</p> -->
+    <button (click)="onSaveClick()" mat-flat-button color='primary'>Save</button>
+    <button (click)="onNoClick()" mat-flat-button>Cancel</button>
+    
+</form>

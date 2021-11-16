@@ -1,0 +1,26 @@
+<!-- <div>
+    <h1>new list data</h1>
+    <mat-form-field appearance="fill">
+        <mat-label>title:</mat-label>
+        <input matInput >
+    </mat-form-field>
+    <form>
+        <label>title: </label>
+        <input #listtitle type="text" (keyup)="getVal({title:listtitle.value})">
+        <div>
+            <button (click)="onSaveClick()">save</button>
+            <button (click)="onNoClick()">cancel</button>
+        </div>
+    </form>
+</div> -->
+
+<form class="task-form">
+    <h1>New list detail</h1>
+    <mat-form-field class="input-container full-width" appearance="fill">
+        <mat-label class="input" color="black">Title</mat-label>
+        <input #listtitle matInput (keyup)="getVal({title:listtitle.value})">
+    </mat-form-field>
+    <!-- <p>enter some title</p> -->
+    <button (click)="onSaveClick()" mat-flat-button color='primary'>Add List</button>
+    <button (click)="onNoClick()" mat-flat-button>Cancel</button>
+</form>

@@ -1,0 +1,86 @@
+<div class="main-list">
+    <mat-sidenav-container class="nav-container">
+        <div class="title-name">
+            <h2>Main List</h2>
+        </div>
+        <div class="border"></div>
+        <div class="lists-container" *ngFor="let item of lists">
+            <button mat-button (click)='goToList(item._id)'>{{item.title}}</button>
+        </div>
+        <div class="add-btn">
+            <button  (click)="openDialog()" mat-mini-fab color="primary">
+                <mat-icon>add</mat-icon>
+            </button>
+        </div>
+        <div class="border"></div>
+        <div class="done-task-btn">
+            <button mat-stroked-button (click)='getDoneTasks()'>Done tasks</button>
+        </div>
+    </mat-sidenav-container>
+    <div class="content-container">
+        <!-- <h1>main list</h1> -->
+        <!-- <app-task-card [task]='task[1]'></app-task-card> -->
+        <form class="task-form">
+            <div>
+                <mat-form-field class="input-container" appearance="fill">
+                    <mat-label class="input">Title</mat-label>
+                    <input #tasktitle matInput (keyup)="getNewTaskVal({title:tasktitle.value})" placeholder="Ex. home works">
+                </mat-form-field>
+                <mat-form-field class="input-container right" appearance="fill">
+                    <mat-label>Choose a date</mat-label>
+                    <input #taskdate (keyup)="getNewTaskVal({date:taskdate.value})" (dateChange)="getNewTaskVal({date:$event.target.value})"  matInput [matDatepicker]="picker">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker ></mat-datepicker>
+                </mat-form-field>
+
+            </div>
+            <mat-form-field class="input-container full-width" appearance="fill">
+                <mat-label class="input" color="black">Description</mat-label>
+                <textarea #taskdesc (keyup)="getNewTaskVal({description:taskdesc.value})" matInput></textarea>
+            </mat-form-field>
+            <!-- <div>
+                <button (click)="addTask()" mat-flat-button color='primary'>Add Task</button>
+            </div> -->
+        </form>
+        <div>
+            <button (click)="addTask()" mat-flat-button color='primary'>Add Task</button>
+        </div>
+
+        <div *ngIf="tasks&&tasks.length>0">
+            <div class="tasks-list" *ngFor='let item of tasks'>
+                <app-task-card [listIsMain]=true [task]='item'></app-task-card>
+            </div>
+        </div>
+
+
+        <div *ngIf="tasks.length==0" class="empty-list">
+            <h1>there is no tasks</h1>
+        </div>
+
+        <!-- <form [formGroup]="todoForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="exampleInputEmail1">Task</label>
+                    <input type="text" class="form-control" formControlName="task" id="exampleInputEmail1"
+                        aria-describedby="emailHelp" placeholder="Create a Task">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="exampleInputPassword1">Assignee</label>
+                    <input type="text" class="form-control" formControlName="assignee" id="exampleInputPassword1"
+                        placeholder="Assignee">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label for="sel1">Status:</label>
+                    <select formControlName="status" class="form-control" id="sel1">
+                        <option>To Be Done</option>
+                        <option>In Progress</option>
+                        <option>Completed</option>
+                    </select>
+                </div>
+            </div>
+            <button type="submit" [disabled]="!todoForm.valid" class="btn btn-danger">Create</button>
+        </form> -->
+    </div>
+</div>

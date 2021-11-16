@@ -1,0 +1,52 @@
+<div class="list">
+    <div class="list-info">
+        <div class="title-input">
+            <mat-form-field appearance="fill">
+                <input #listtitleedit matInput (keyup)="getVal({title:listtitleedit.value})" value={{list.title}}>
+
+            </mat-form-field>
+            <!-- TODO:add focus on input -->
+            <mat-icon class="icon" size="10">create</mat-icon>
+        </div>
+        <div class="list-btn">
+            <button (click)="updateList()" *ngIf="changed" mat-stroked-button>Save changes</button>
+        </div>
+        <button (click)="deleteList()" mat-stroked-button color="warn">Delete this list</button>
+
+    </div>
+    <div class="list-tasks">
+        <div class="task-form">
+            <div>
+                <mat-form-field class="input-container" appearance="fill">
+                    <mat-label class="input">Title</mat-label>
+                    <input #tasktitle matInput (keyup)="getNewTaskVal({title:tasktitle.value})"
+                        placeholder="Ex. home works">
+                </mat-form-field>
+                <mat-form-field class="input-container right" appearance="fill">
+                    <mat-label>Choose a date</mat-label>
+                    <input #taskdate (keyup)="getNewTaskVal({date:taskdate.value})"
+                        (dateChange)="getNewTaskVal({date:$event.target.value})" matInput [matDatepicker]="picker">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+
+            </div>
+            <mat-form-field class="input-container full-width" appearance="fill">
+                <mat-label class="input" color="black">Description</mat-label>
+                <textarea #taskdesc (keyup)="getNewTaskVal({description:taskdesc.value})" matInput></textarea>
+            </mat-form-field>
+            <div>
+                <button (click)="addTask()" mat-flat-button color='primary'>Add Task</button>
+            </div>
+        </div>
+        <div *ngIf="tasks&&tasks.length>0">
+            <div class="tasks-list" *ngFor='let item of tasks'>
+                <app-task-card  [task]='item'></app-task-card>
+            </div>
+        </div>
+        <div *ngIf="tasks.length==0" class="empty-list">
+            <h1>there is no tasks</h1>
+        </div>
+    </div>
+
+</div>

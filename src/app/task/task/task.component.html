@@ -1,0 +1,15 @@
+<div class="done-tasks">
+    <div class="title">
+        <h2>Done Tasks</h2>
+    </div>
+    <div class="list">
+        <div *ngIf="doneTasks&&doneTasks.length>0">
+            <div class="tasks-list" *ngFor='let item of doneTasks'>
+                <app-task-card [isDone]='true' [task]='item'></app-task-card>
+            </div>
+        </div>
+        <div *ngIf="doneTasks.length==0" class="empty-list">
+            <h1>there is no tasks</h1>
+        </div>
+    </div>
+</div>
